@@ -1,4 +1,5 @@
-import Extension from "components/extensions"
+import Extension from "components/extensions";
+import Providers from "components/provider"
 import cssText from "data-text:~style.css"
 import type {
   PlasmoCSConfig,
@@ -43,7 +44,11 @@ from CSS properties that use the "rem" unit, such as font-size: 1.2rem;.
 }
 
 function PlasmoMainUi() {
-  return <Extension />
+  return (
+    <Providers>
+      <Extension />
+    </Providers>
+  )
 }
 
 export default PlasmoMainUi
