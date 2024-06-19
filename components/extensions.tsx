@@ -1,10 +1,15 @@
-import { get } from "http"
 import { Collapsible } from "@radix-ui/react-collapsible"
 import { useExtension } from "contexts/extension-context"
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { getVideoData } from "utils/functions"
 
+import { CollapsibleContent } from "./collapsible"
+import ExtensionActions from "./extension-actions"
+import ExtensionPanels from "./extensionPanel"
+
 export default function Extension() {
+  const ref = useRef<HTMLDivElement>(null)
+
   const {
     extensionContainer,
     extensionCurrentPanel,
@@ -38,10 +43,6 @@ export default function Extension() {
         setExtensionLoading(true)
 
         const data = await getVideoData(id)
-
-        console.log("Data")
-        console.log(data)
-
         setExtensionData(data)
         setExtensionLoading(false)
       }
@@ -71,11 +72,19 @@ export default function Extension() {
 
   if (!extensiontheme) return null
 
+  console.log({ extensionOpen })
+
   return (
-    <main className="antialiased w-full mb-3 z-10">
+    <main ref={setExtensionContainer} className="antialiased w-full mb-3 z-10">
       <div className="w-full">
-        <Collapsible className="space-y-3">
-          <h1 className="text-white">Extension Actions</h1>
+        <Collapsible
+          open={extensionOpen}
+          onOpenChange={setExtensionIsOpen}
+          className="space-y-3">
+          <ExtensionActions />
+          <CollapsibleContent className="w-full h-fit max-h-[500px] border border-zinc-200 rounded-md overflow-auto">
+            <ExtensionPanels />
+          </CollapsibleContent>
         </Collapsible>
       </div>
     </main>
