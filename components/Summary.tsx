@@ -1,3 +1,9 @@
+import SummaryActions from "./summary-actions"
+
 export default function Summary() {
-  return <></>
+  return (
+    <>
+      <SummaryActions />
+    </>
+  )
 }

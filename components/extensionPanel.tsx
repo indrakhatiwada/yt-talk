@@ -1,13 +1,15 @@
-import { useExtension } from "contexts/extension-context"
+import { useExtension } from "contexts/extension-context";
+
+
+
+import Summary from "./Summary"
 
 export default function ExtensionPanels() {
   const { extensionCurrentPanel } = useExtension()
 
   return (
     <div className="">
-      {extensionCurrentPanel === "Summary" && (
-        <h1 className="text-white">Summary</h1>
-      )}
+      {extensionCurrentPanel === "Summary" && <Summary />}
       {extensionCurrentPanel === "Transcript" && (
         <h1 className="text-white">Transcript</h1>
       )}
